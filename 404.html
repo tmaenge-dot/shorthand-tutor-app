@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shorthand Tutor - Pitman Shorthand Learning App</title>
+    <script>
+      // GitHub Pages SPA redirect
+      // This script redirects all 404 requests back to index.html
+      // which allows client-side routing to work properly
+      (function(l) {
+        if (l.search[1] === '/' ) {
+          var decoded = sessionStorage.redirect || l.search.slice(1);
+          if (decoded) {
+            sessionStorage.redirect = '';
+            l.replace(l.pathname.split('/').slice(0, -1).join('/') + '/' + decoded);
+          }
+        }
+      }(window.location))
+    </script>
+  </head>
+  <body>
+    <!-- This page will redirect to index.html with the proper route -->
+  </body>
+</html>

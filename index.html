@@ -8,7 +8,20 @@
     <meta name="description" content="Interactive Pitman Shorthand learning application based on NCS syllabus for secretarial studies" />
     <meta name="keywords" content="shorthand, pitman, stenography, learning, education, secretarial, NCS" />
     <meta name="author" content="Tswapong Bokone Brigade - Mr T. Maenge" />
-    <script type="module" crossorigin src="/shorthand-tutor-app/assets/index-9d021f1a.js"></script>
+    
+    <!-- GitHub Pages SPA redirect handler -->
+    <script>
+      (function(l) {
+        if (l.search[1] === '/' ) {
+          var decoded = sessionStorage.redirect || l.search.slice(1);
+          if (decoded) {
+            sessionStorage.redirect = '';
+            history.replaceState(null, null, l.pathname.slice(0, -1) + decoded);
+          }
+        }
+      }(window.location))
+    </script>
+    <script type="module" crossorigin src="/shorthand-tutor-app/assets/index-83a38c43.js"></script>
     <link rel="modulepreload" crossorigin href="/shorthand-tutor-app/assets/vendor-71f819f8.js">
     <link rel="modulepreload" crossorigin href="/shorthand-tutor-app/assets/mui-2ff1ce97.js">
     <link rel="modulepreload" crossorigin href="/shorthand-tutor-app/assets/router-dd2b36d2.js">

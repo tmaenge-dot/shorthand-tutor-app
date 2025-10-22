@@ -1,0 +1,17 @@
+Theory check Sis
+
+Write the following in shorthand:
+
+shape 6 depot
+essay 7 edge
+
+j 8 show
+thud 9 fed
+fade 10 votes
+
+OAPwon
+—
+oo)
+=
+
+Curved strokes 11

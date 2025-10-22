@@ -1,0 +1,11 @@
+Acknowledgements
+
+=
+
+vig Authors and Publishers gratefully acknowledge the contribution
+made by Bryan Coombs to the writing of this book. They also wish to
+on Bert Canning who so kindly read through the completed manuscript
+and commented upon it.
+
+nn
+Acknowledgements v

@@ -1,0 +1,17 @@
+MEPS Theory check BEERS
+
+Write the following in shorthand:
+
+1 charge 6 d
+
+2 repair 7 bew
+
+3 salary 8 arrears
+
+4 cashier 9 censor
+
+5 erratic 10 we shall arrange
+
+SEES
+
+Stroke R 39

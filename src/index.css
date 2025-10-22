@@ -1,0 +1,223 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f5f5f5;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* Shorthand canvas styles */
+.shorthand-canvas {
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  background: white;
+  cursor: crosshair;
+}
+
+.shorthand-canvas:focus {
+  outline: 2px solid #1976d2;
+  outline-offset: 2px;
+}
+
+/* Practice area styles */
+.practice-area {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* Lesson content styles */
+.lesson-content {
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.lesson-content h1,
+.lesson-content h2,
+.lesson-content h3 {
+  margin-bottom: 16px;
+  color: #1976d2;
+}
+
+.lesson-content p {
+  margin-bottom: 16px;
+}
+
+.lesson-content ul,
+.lesson-content ol {
+  margin-bottom: 16px;
+  padding-left: 24px;
+}
+
+/* Speed indicator styles */
+.speed-indicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+  border-radius: 20px;
+  font-weight: 500;
+}
+
+/* Progress styles */
+.progress-container {
+  background: #f5f5f5;
+  border-radius: 8px;
+  padding: 4px;
+  margin: 16px 0;
+}
+
+.progress-bar {
+  background: linear-gradient(90deg, #4caf50 0%, #8bc34a 100%);
+  height: 8px;
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+/* Shorthand stroke styles */
+.stroke-light {
+  stroke: #1976d2;
+  stroke-width: 2;
+  fill: none;
+}
+
+.stroke-heavy {
+  stroke: #1976d2;
+  stroke-width: 4;
+  fill: none;
+}
+
+.stroke-circle {
+  stroke: #1976d2;
+  stroke-width: 2;
+  fill: none;
+}
+
+.stroke-dot {
+  fill: #1976d2;
+}
+
+.stroke-dash {
+  stroke: #1976d2;
+  stroke-width: 2;
+  stroke-dasharray: 5,5;
+}
+
+/* Animation classes */
+.fade-in {
+  animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.slide-in {
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .lesson-content {
+    padding: 16px;
+  }
+  
+  .practice-area {
+    padding: 16px;
+  }
+  
+  .shorthand-canvas {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+/* Print styles for exercises */
+@media print {
+  .no-print {
+    display: none;
+  }
+  
+  .shorthand-canvas {
+    border: 1px solid #000;
+  }
+}
+
+/* Accessibility improvements */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Focus styles for keyboard navigation */
+.focusable:focus {
+  outline: 2px solid #1976d2;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .stroke-light,
+  .stroke-heavy,
+  .stroke-circle,
+  .stroke-dash {
+    stroke: #000;
+  }
+  
+  .stroke-dot {
+    fill: #000;
+  }
+}

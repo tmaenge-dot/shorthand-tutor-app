@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shorthand Tutor App - Quick Access</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #1976d2 0%, #1565c0 100%);
+            color: white;
+            text-align: center;
+        }
+        .container {
+            background: white;
+            color: #333;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        .qr-container {
+            margin: 20px 0;
+        }
+        .access-info {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        .url {
+            font-size: 24px;
+            font-weight: bold;
+            color: #1976d2;
+            margin: 15px 0;
+            word-break: break-all;
+        }
+        .instructions {
+            text-align: left;
+            margin: 20px 0;
+        }
+        .instructions li {
+            margin: 10px 0;
+            padding: 5px 0;
+        }
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .feature {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #1976d2;
+        }
+        .status {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            background: #4caf50;
+            color: white;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎓 Shorthand Tutor App</h1>
+        <p class="status">✅ LIVE & READY FOR LEARNERS</p>
+        
+        <div class="access-info">
+            <h2>📱 Access Instructions for Students</h2>
+            <div class="url" id="appUrl">http://192.168.8.114:3001</div>
+            
+            <div class="qr-container">
+                <div id="qr-code"></div>
+                <p><em>Scan QR code with phone camera or type URL above</em></p>
+            </div>
+        </div>
+
+        <div class="instructions">
+            <h3>🔧 Setup Instructions:</h3>
+            <ol>
+                <li><strong>Ensure WiFi Connection:</strong> All devices must be on the same WiFi network</li>
+                <li><strong>Share the URL:</strong> Give students the address above</li>
+                <li><strong>Mobile Access:</strong> Works on phones, tablets, and computers</li>
+                <li><strong>No Installation Required:</strong> Just open in any web browser</li>
+            </ol>
+        </div>
+
+        <div class="features">
+            <div class="feature">
+                <h4>📚 20 Learning Modules</h4>
+                <p>Complete A-U module progression with authentic NCS content</p>
+            </div>
+            <div class="feature">
+                <h4>⚡ Speed Development</h4>
+                <p>Timed exercises with WPM tracking for skill building</p>
+            </div>
+            <div class="feature">
+                <h4>🎧 Dictation Practice</h4>
+                <p>Audio exercises with real-time word highlighting</p>
+            </div>
+            <div class="feature">
+                <h4>📊 Progress Tracking</h4>
+                <p>Individual student progress monitoring and assessment</p>
+            </div>
+        </div>
+
+        <div class="instructions">
+            <h3>👩‍🎓 Student Quick Start:</h3>
+            <ol>
+                <li>Open web browser (Chrome, Firefox, Safari, Edge)</li>
+                <li>Navigate to <strong>Speed Development</strong> for practice</li>
+                <li>Select appropriate <strong>Module (A-U)</strong> for skill level</li>
+                <li>Choose between <strong>Speed Exercises</strong> or <strong>Dictation Practice</strong></li>
+                <li>Track progress in the <strong>Progress</strong> section</li>
+            </ol>
+        </div>
+
+        <div style="margin-top: 30px; padding: 20px; background: #f0f0f0; border-radius: 10px;">
+            <h3>🔧 Technical Support</h3>
+            <p><strong>Server Status:</strong> <span style="color: #4caf50;">● ONLINE</span></p>
+            <p><strong>Network:</strong> Local WiFi Network</p>
+            <p><strong>Device Compatibility:</strong> All modern browsers</p>
+            <p><strong>To Stop Server:</strong> Press Ctrl+C in terminal</p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+    <script>
+        // Generate QR code for the app URL
+        const url = document.getElementById('appUrl').textContent;
+        QRCode.toCanvas(document.createElement('canvas'), url, {
+            width: 200,
+            margin: 2,
+            color: {
+                dark: '#1976d2',
+                light: '#ffffff'
+            }
+        }, function (error, canvas) {
+            if (!error) {
+                document.getElementById('qr-code').appendChild(canvas);
+            } else {
+                document.getElementById('qr-code').innerHTML = '<p>QR Code generation failed. Use URL above.</p>';
+            }
+        });
+
+        // Auto-refresh server status (optional)
+        function checkServerStatus() {
+            fetch(url)
+                .then(response => {
+                    if (response.ok) {
+                        console.log('Server is running');
+                    }
+                })
+                .catch(error => {
+                    console.log('Server check failed:', error);
+                });
+        }
+
+        // Check server status every 30 seconds
+        setInterval(checkServerStatus, 30000);
+    </script>
+</body>
+</html>

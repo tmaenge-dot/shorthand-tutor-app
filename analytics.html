@@ -1,0 +1,98 @@
+<!-- Google Analytics (Global Site Tag) - replace GA_MEASUREMENT_ID with your actual ID -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'GA_MEASUREMENT_ID', {
+    page_title: 'Shorthand Tutor - Interactive Pitman Shorthand Learning',
+    page_location: window.location.href,
+    custom_map: {
+      'custom_parameter_1': 'educational_content_type',
+      'custom_parameter_2': 'learning_module',
+      'custom_parameter_3': 'user_progress_level'
+    }
+  });
+
+  // Track educational content interactions
+  function trackLearningEvent(action, module, progress) {
+    gtag('event', action, {
+      event_category: 'Learning',
+      event_label: module,
+      custom_parameter_1: 'shorthand_lesson',
+      custom_parameter_2: module,
+      custom_parameter_3: progress,
+      value: 1
+    });
+  }
+
+  // Track speed development
+  function trackSpeedDevelopment(wpm, accuracy, module) {
+    gtag('event', 'speed_achievement', {
+      event_category: 'Performance', 
+      event_label: 'WPM_' + wpm,
+      custom_parameter_1: 'speed_exercise',
+      custom_parameter_2: module,
+      custom_parameter_3: 'accuracy_' + accuracy,
+      value: wpm
+    });
+  }
+
+  // Track assessment completion
+  function trackAssessmentCompletion(module, score, passed) {
+    gtag('event', 'assessment_complete', {
+      event_category: 'Assessment',
+      event_label: module + '_' + (passed ? 'passed' : 'failed'),
+      custom_parameter_1: 'assessment',
+      custom_parameter_2: module,
+      custom_parameter_3: 'score_' + score,
+      value: score
+    });
+  }
+
+  // Track search queries for shorthand terms
+  function trackSearchQuery(query) {
+    gtag('event', 'search', {
+      search_term: query,
+      event_category: 'Site Search',
+      custom_parameter_1: 'shorthand_search'
+    });
+  }
+</script>
+
+<!-- Microsoft Clarity (replace with your actual Project ID) -->
+<script type="text/javascript">
+  (function(c,l,a,r,i,t,y){
+    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+  })(window, document, "clarity", "script", "CLARITY_PROJECT_ID");
+</script>
+
+<!-- Facebook Pixel (replace with your actual Pixel ID) -->
+<script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', 'FACEBOOK_PIXEL_ID');
+  fbq('track', 'PageView');
+  
+  // Track educational content views
+  function trackEducationalContent(contentType, module) {
+    fbq('track', 'ViewContent', {
+      content_type: contentType,
+      content_ids: [module],
+      content_name: 'Shorthand Module ' + module,
+      content_category: 'Educational Content'
+    });
+  }
+</script>
+<noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=FACEBOOK_PIXEL_ID&ev=PageView&noscript=1"
+/></noscript>

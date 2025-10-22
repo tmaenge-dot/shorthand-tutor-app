@@ -1,1 +1,0 @@
-import{j as r}from"./mui-dbc2381b.js";import"./vendor-71f819f8.js";import{u as o}from"./index-550bbd90.js";import{N as s}from"./router-dd2b36d2.js";import"./utils-6bbf63f7.js";import"./firebase-a0f82ea0.js";const t=({children:t})=>{const{currentUser:i,loading:e}=o();return e?null:i?t:r(s,{to:"/signin",replace:!0})};export{t as default};

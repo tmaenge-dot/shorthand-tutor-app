@@ -1,0 +1,54 @@
+User-agent: *
+Allow: /
+
+# Allow crawling of all content
+Disallow: /admin/
+Disallow: /private/
+Disallow: /*.json$
+Disallow: /src/
+
+# Allow specific educational content
+Allow: /dashboard
+Allow: /practice/
+Allow: /lesson/
+Allow: /assessment/
+Allow: /progress
+Allow: /speed-development/
+Allow: /resources
+Allow: /reference
+
+# Priority crawling
+Crawl-delay: 1
+
+# Sitemap location
+Sitemap: https://tmaenge-dot.github.io/shorthand-tutor-app/sitemap.xml
+
+# Search engines
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+# Educational content crawlers
+User-agent: ia_archiver
+Allow: /
+
+# Social media crawlers for better sharing
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /

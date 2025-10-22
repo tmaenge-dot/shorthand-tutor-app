@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import { TextField, Button, Box, Typography } from '@mui/material'
 import { useAuth } from '../../hooks/useAuthMock'
+import { useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast'
 
 const schema = yup.object().shape({
@@ -13,14 +14,29 @@ const schema = yup.object().shape({
 })
 
 const SignUp = ({ onSuccess }) => {
-  const { signup } = useAuth()
+  const { signup, currentUser } = useAuth()
+  const navigate = useNavigate()
   const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm({ resolver: yupResolver(schema) })
+
+  // Redirect if already logged in
+  useEffect(() => {
+    if (currentUser) {
+      navigate('/dashboard')
+    }
+  }, [currentUser, navigate])
 
   const onSubmit = async (data) => {
     try {
-      await signup(data)
-      toast.success('Account created')
-      onSuccess && onSuccess()
+      await signup(data.email, data.password, data.displayName)
+      toast.success('Account created successfully!')
+      
+      // Call onSuccess callback if provided
+      if (onSuccess) {
+        onSuccess()
+      } else {
+        // Navigate to dashboard if no callback
+        navigate('/dashboard')
+      }
     } catch (err) {
       console.error(err)
       toast.error(err.message || 'Sign-up failed')

@@ -52,9 +52,9 @@ function TabPanel(props) {
 }
 
 const SimpleAssessment = () => {
-  const { checkId } = useParams()
+  const { moduleId } = useParams()
   const navigate = useNavigate()
-  const [selectedModule, setSelectedModule] = useState(checkId || 'A')
+  const [selectedModule, setSelectedModule] = useState(moduleId || 'A')
   const [activeTab, setActiveTab] = useState(0)
   const [answers, setAnswers] = useState({})
   const [isAssessmentStarted, setIsAssessmentStarted] = useState(false)

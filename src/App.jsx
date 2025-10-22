@@ -55,6 +55,9 @@ import Resources from './pages/Resources/Resources.tsx'
 // Import Symbol Reference component
 import SymbolReference from './pages/Reference/SymbolReference.tsx'
 
+// Import LessonModule component
+import LessonModule from './pages/LessonModule/LessonModule.tsx'
+
 // Keep essential auth components
 const SignIn = lazy(() => import('./components/Auth/SignIn'))
 const SignUp = lazy(() => import('./components/Auth/SignUp'))
@@ -80,7 +83,13 @@ function App() {
             >
               <Box sx={{ display: 'flex', minHeight: '100vh' }}>
                 <Navigation />
-                <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+                <Box component="main" sx={{ 
+                  flexGrow: 1, 
+                  p: { xs: 1, sm: 2, md: 3 },
+                  ml: { md: '280px' },
+                  width: { md: `calc(100% - 280px)` },
+                  mt: 8 // Account for AppBar height
+                }}>
                   <Suspense fallback={<LoadingSpinner />}>
                     <Routes>
                       {/* Welcome/Auth Routes */}
@@ -90,8 +99,11 @@ function App() {
                       
                       {/* Core Learning Routes - STABLE SIMPLE COMPONENTS ONLY */}
                       <Route path="/dashboard" element={<ProtectedRoute><SimpleDashboard /></ProtectedRoute>} />
+                      <Route path="/lesson/:moduleId" element={<ProtectedRoute><LessonModule /></ProtectedRoute>} />
                       <Route path="/practice" element={<ProtectedRoute><SimplePractice /></ProtectedRoute>} />
+                      <Route path="/practice/:lessonId" element={<ProtectedRoute><SimplePractice /></ProtectedRoute>} />
                       <Route path="/assessment" element={<ProtectedRoute><SimpleAssessment /></ProtectedRoute>} />
+                      <Route path="/assessment/:moduleId" element={<ProtectedRoute><SimpleAssessment /></ProtectedRoute>} />
                       <Route path="/progress" element={<ProtectedRoute><SimpleProgress /></ProtectedRoute>} />
                       <Route path="/speed-development" element={<ProtectedRoute><SimpleSpeedDevelopment /></ProtectedRoute>} />
                       <Route path="/speed-development/:moduleId" element={<ProtectedRoute><SimpleSpeedDevelopment /></ProtectedRoute>} />

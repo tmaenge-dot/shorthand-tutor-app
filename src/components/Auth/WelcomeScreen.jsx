@@ -108,14 +108,31 @@ const WelcomeScreen = () => {
       <Box sx={{ maxWidth: 1200, width: '100%' }}>
         {/* Header */}
         <Box sx={{ textAlign: 'center', mb: 4 }}>
-          <Typography variant="h2" sx={{ color: 'white', fontWeight: 'bold', mb: 2 }}>
-            Master Pitman Shorthand
+          <Typography variant="h1" component="h1" sx={{ 
+            color: 'white', 
+            fontWeight: 'bold', 
+            mb: 2,
+            fontSize: { xs: '2.5rem', md: '3.5rem' }
+          }}>
+            Learn Pitman Shorthand Online
           </Typography>
-          <Typography variant="h5" sx={{ color: 'rgba(255,255,255,0.9)', mb: 1 }}>
-            Interactive learning with the official NCS curriculum
+          <Typography variant="h2" component="h2" sx={{ 
+            color: 'rgba(255,255,255,0.9)', 
+            mb: 2,
+            fontSize: { xs: '1.5rem', md: '2rem' }
+          }}>
+            Master Stenography with Interactive Lessons & AI Feedback
+          </Typography>
+          <Typography variant="h3" component="h3" sx={{ 
+            color: 'rgba(255,255,255,0.8)', 
+            mb: 1,
+            fontSize: { xs: '1.1rem', md: '1.3rem' },
+            fontWeight: 400
+          }}>
+            Complete NCS Curriculum • Speed Development • Professional Certification
           </Typography>
           <Typography variant="body1" sx={{ color: 'rgba(255,255,255,0.7)' }}>
-            Practice writing, speed development, and audio dictation
+            Perfect for secretarial studies, court reporting, and professional stenography training
           </Typography>
         </Box>
 
@@ -222,30 +239,68 @@ const WelcomeScreen = () => {
 
         {/* Bottom Features */}
         <Paper sx={{ p: 3, textAlign: 'center', backgroundColor: 'rgba(255,255,255,0.9)' }}>
-          <Typography variant="h6" gutterBottom>
-            What makes our shorthand course special?
+          <Typography variant="h4" component="h4" gutterBottom>
+            Why Choose Our Shorthand Learning Platform?
+          </Typography>
+          <Typography variant="body1" color="text.secondary" sx={{ mb: 3 }}>
+            The most comprehensive online Pitman shorthand course with proven results for stenography students and professionals
           </Typography>
           <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr 1fr' }, gap: 3, mt: 2 }}>
             <Box>
               <School sx={{ fontSize: 32, color: 'primary.main', mb: 1 }} />
-              <Typography variant="subtitle1" fontWeight="bold">Official NCS Curriculum</Typography>
+              <Typography variant="h6" component="h5" fontWeight="bold">Official NCS Syllabus</Typography>
               <Typography variant="body2" color="text.secondary">
-                Based on the National Council for Shorthand official course materials
+                Authentic National Council for Shorthand curriculum covering all essential stenography principles, symbols, and advanced techniques for professional competency
               </Typography>
             </Box>
             <Box>
               <Speed sx={{ fontSize: 32, color: 'primary.main', mb: 1 }} />
-              <Typography variant="subtitle1" fontWeight="bold">Interactive Practice</Typography>
+              <Typography variant="h6" component="h5" fontWeight="bold">Speed Development Training</Typography>
               <Typography variant="body2" color="text.secondary">
-                Canvas-based stroke practice with real-time feedback and accuracy scoring
+                Progressive speed building exercises from 20 WPM to 120+ WPM with real-time accuracy tracking and personalized feedback for stenographic excellence
               </Typography>
             </Box>
             <Box>
               <VolumeUp sx={{ fontSize: 32, color: 'primary.main', mb: 1 }} />
-              <Typography variant="subtitle1" fontWeight="bold">Audio Dictation</Typography>
+              <Typography variant="h6" component="h5" fontWeight="bold">AI-Powered Dictation</Typography>
               <Typography variant="body2" color="text.secondary">
-                Voice recognition and text-to-speech for comprehensive dictation training
+                Advanced voice recognition technology with natural speech patterns, perfect for court reporting preparation and professional stenography practice
               </Typography>
+            </Box>
+          </Box>
+          
+          {/* Additional SEO content */}
+          <Box sx={{ mt: 4, pt: 3, borderTop: '1px solid', borderColor: 'divider' }}>
+            <Typography variant="h5" component="h4" gutterBottom>
+              Complete Stenography Course Features
+            </Typography>
+            <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: '1fr 1fr' }, gap: 2, mt: 2 }}>
+              <Box sx={{ textAlign: 'left' }}>
+                <Typography variant="h6" component="h5" color="primary.main" gutterBottom>
+                  Learning Modules & Practice
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  • 21 comprehensive learning modules (A-V)<br/>
+                  • Interactive stroke practice with canvas drawing<br/>
+                  • Symbol recognition and muscle memory training<br/>
+                  • Vowel placement and positioning exercises<br/>
+                  • Shortform and phrasing techniques<br/>
+                  • Real-time accuracy scoring and feedback
+                </Typography>
+              </Box>
+              <Box sx={{ textAlign: 'left' }}>
+                <Typography variant="h6" component="h5" color="primary.main" gutterBottom>
+                  Professional Development
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  • Court reporting preparation and certification<br/>
+                  • Secretarial studies examination support<br/>
+                  • Business stenography and note-taking skills<br/>
+                  • Medical and legal terminology practice<br/>
+                  • Professional speed and accuracy standards<br/>
+                  • Career advancement in stenographic fields
+                </Typography>
+              </Box>
             </Box>
           </Box>
         </Paper>

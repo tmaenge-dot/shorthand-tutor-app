@@ -76,11 +76,18 @@ const SimpleDashboard = () => {
           {/* Welcome Section */}
           <Grid item xs={12}>
             <Paper sx={{ p: 3, mb: 3, bgcolor: 'primary.main', color: 'white' }}>
-              <Typography variant="h4" gutterBottom>
-                Welcome to Pitman Shorthand
+              <Typography variant="h1" component="h1" gutterBottom sx={{ fontSize: '2rem' }}>
+                Pitman Shorthand Learning Dashboard
               </Typography>
-              <Typography variant="h6" sx={{ opacity: 0.9 }}>
-                Master the art of shorthand writing with our comprehensive NCS curriculum
+              <Typography variant="h2" component="h2" sx={{ 
+                opacity: 0.9, 
+                fontSize: '1.2rem',
+                fontWeight: 400 
+              }}>
+                Master stenography with interactive lessons, speed development, and professional certification
+              </Typography>
+              <Typography variant="body1" sx={{ opacity: 0.8, mt: 1 }}>
+                Complete NCS curriculum • Court reporting preparation • Secretarial skills development
               </Typography>
             </Paper>
           </Grid>

@@ -2,6 +2,20 @@ import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
+import { TextField, Button, Box, Typography } from '@mui/material'
+import { useAuth } from '../../hooks/useAuthMock'
+import { useNavigate } from 'react-router-dom'
+import toast from 'react-hot-toast'
+
+const schema = yup.object().shape({
+  email: yup.string().email('Invalid email').required('Email is required'),
+  password: yup.string().required('Password is required')
+})
+
+import React, { useEffect } from 'react'
+import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import * as yup from 'yup'
 import { TextField, Button, Box, Typography, CircularProgress } from '@mui/material'
 import { useAuth } from '../../hooks/useAuthMock'
 import { useNavigate } from 'react-router-dom'

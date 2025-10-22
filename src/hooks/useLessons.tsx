@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react'
 import { LessonModule } from '../types/index'
-import { lessonModules } from '../data/lessonData'
+import lessonModules from '../data/lessonData'
 
 interface LessonContextType {
   lessons: LessonModule[]

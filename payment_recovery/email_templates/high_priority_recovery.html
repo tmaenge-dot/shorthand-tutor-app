@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+        .header { background: #d32f2f; color: white; padding: 20px; text-align: center; }
+        .content { padding: 30px; background: #f9f9f9; }
+        .cta-button { 
+            background: #1976d2; 
+            color: white; 
+            padding: 15px 30px; 
+            text-decoration: none; 
+            border-radius: 5px; 
+            display: inline-block;
+            margin: 20px 0;
+        }
+        .urgent { background: #fff3cd; border: 1px solid #ffeaa7; padding: 15px; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚨 Urgent: Payment Issue Resolution Required</h1>
+        </div>
+        
+        <div class="content">
+            <div class="urgent">
+                <strong>Immediate Attention Required</strong><br>
+                We encountered an issue processing your payment for Shorthand Tutor App.
+            </div>
+            
+            <h2>Dear {{customerName}},</h2>
+            
+            <p>We noticed that your payment for <strong>{{subscriptionPlan}}</strong> ({{subscriptionPrice}}) encountered a technical issue during processing.</p>
+            
+            <p><strong>What happened:</strong></p>
+            <ul>
+                <li>Payment attempt failed due to: {{errorDescription}}</li>
+                <li>Failure occurred on: {{failureDate}}</li>
+                <li>Your subscription access has been temporarily preserved</li>
+            </ul>
+            
+            <p><strong>Immediate Action Required:</strong></p>
+            <p>As a valued customer, we've reserved your subscription for the next 48 hours. Please complete your payment to maintain uninterrupted access to your shorthand training.</p>
+            
+            <a href="{{recoveryLink}}" class="cta-button">
+                🔒 Complete Payment Securely (1-Click Recovery)
+            </a>
+            
+            <p><strong>Alternative Payment Options:</strong></p>
+            <ul>
+                <li>Try a different credit/debit card</li>
+                <li>Use PayPal or digital wallet</li>
+                <li>Contact your bank to authorize the transaction</li>
+            </ul>
+            
+            <p><strong>Need Help?</strong></p>
+            <p>Our payment specialists are standing by:</p>
+            <ul>
+                <li>📞 Call: 1-800-SHORTHAND (Priority Line)</li>
+                <li>📧 Email: billing@shorthandtutor.com</li>
+                <li>💬 Live Chat: Available 24/7</li>
+            </ul>
+            
+            <p>We apologize for any inconvenience and appreciate your patience as we resolve this matter.</p>
+            
+            <p>Best regards,<br>
+            The Shorthand Tutor Team</p>
+            
+            <hr>
+            <p style="font-size: 12px; color: #666;">
+                This is an automated recovery email triggered by payment failure ID: {{attemptId}}<br>
+                If you've already resolved this issue, please disregard this message.
+            </p>
+        </div>
+    </div>
+</body>
+</html>

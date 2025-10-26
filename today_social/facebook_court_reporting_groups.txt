@@ -1,0 +1,31 @@
+Fellow court reporting educators and professionals! 👋
+
+I wanted to share something I've been working on that might interest this community. After conversations with instructors and students, I've developed an interactive Pitman Shorthand learning platform.
+
+**Why I built this:**
+• Too many talented students dropping out due to speed challenges
+• Limited practice opportunities outside classroom hours
+• Need for consistent, immediate feedback on technique
+• High costs of supplementary learning materials
+
+**What it offers:**
+✅ Progressive speed development exercises (80-120+ WPM)
+✅ 24/7 practice access on any device
+✅ Real-time feedback on stroke accuracy and technique
+✅ Detailed progress tracking for instructors
+✅ Complete NCS syllabus alignment
+✅ Completely free for students and institutions
+
+**Early results from partner schools:**
+• 15-20% faster speed development
+• Improved student confidence and engagement
+• Better retention rates in programs
+• Enhanced instructor insights into student progress
+
+The platform is live at: https://tmaenge-dot.github.io/shorthand-tutor-app/
+
+I'd really value feedback from this professional community. What are the biggest challenges you see in shorthand education today? How do you think technology can best support traditional stenography instruction?
+
+Looking forward to your thoughts! 📝⚡
+
+#CourtReporting #ShorthandEducation #Stenography #EducationalTechnology

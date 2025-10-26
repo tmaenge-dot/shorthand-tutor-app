@@ -47,7 +47,8 @@ import {
   CreditCard,
   Rocket,
   Menu,
-  Close
+  Close,
+  Error
 } from '@mui/icons-material'
 import { Link, useLocation } from 'react-router-dom'
 import { useUserProgress } from '../../hooks/useUserProgress'
@@ -214,6 +215,13 @@ const Navigation: React.FC = () => {
       icon: <CreditCard />,
       path: '/billing-dashboard',
       description: 'User subscription management',
+      badge: 'ADMIN'
+    },
+    {
+      text: 'Payment Failures',
+      icon: <Error />,
+      path: '/payment-failures',
+      description: 'Track & recover failed payments',
       badge: 'ADMIN'
     },
     {

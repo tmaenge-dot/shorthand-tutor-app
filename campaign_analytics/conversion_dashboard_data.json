@@ -1,0 +1,92 @@
+{
+  "campaignTracking": {
+    "courtReportingSchools": {
+      "emailsSent": 3,
+      "institutions": [
+        {
+          "name": "Court Reporting Institute of Dallas",
+          "email": "info@cridallas.edu",
+          "utmContent": "cridallas",
+          "trackingUrl": "?utm_source=email&utm_campaign=court-reporting-schools&utm_content=cridallas",
+          "status": "sent",
+          "sentDate": "2025-10-22",
+          "expectedResponse": "2025-10-24 to 2025-10-27"
+        },
+        {
+          "name": "Bryan University Court Reporting",
+          "email": "admissions@bryanuniversity.edu", 
+          "utmContent": "bryan",
+          "trackingUrl": "?utm_source=email&utm_campaign=court-reporting-schools&utm_content=bryan",
+          "status": "sent",
+          "sentDate": "2025-10-22",
+          "expectedResponse": "2025-10-24 to 2025-10-27"
+        },
+        {
+          "name": "Academy of Court Reporting",
+          "email": "info@acreporting.edu",
+          "utmContent": "academy", 
+          "trackingUrl": "?utm_source=email&utm_campaign=court-reporting-schools&utm_content=academy",
+          "status": "sent",
+          "sentDate": "2025-10-22",
+          "expectedResponse": "2025-10-24 to 2025-10-27"
+        }
+      ]
+    },
+    "socialMediaCampaigns": {
+      "linkedin": {
+        "campaign": "linkedin-professionals",
+        "targetAudience": "Court reporting professionals",
+        "trackingUrl": "?utm_source=social&utm_campaign=linkedin-professionals&utm_medium=social",
+        "status": "active",
+        "launchDate": "2025-10-22"
+      },
+      "facebook": {
+        "campaign": "facebook-groups",
+        "targetAudience": "Court reporting communities",
+        "trackingUrl": "?utm_source=social&utm_campaign=facebook-groups&utm_medium=social", 
+        "status": "pending",
+        "plannedLaunch": "2025-10-22"
+      }
+    }
+  },
+  "conversionGoals": {
+    "immediate": [
+      "Landing page visits",
+      "App exploration", 
+      "Feature trial",
+      "Demo requests"
+    ],
+    "shortTerm": [
+      "Account registration",
+      "Module starts", 
+      "Practice sessions",
+      "Assessment attempts"
+    ],
+    "longTerm": [
+      "Module completion",
+      "Regular usage",
+      "Speed improvements", 
+      "Recommendations"
+    ]
+  },
+  "trackingMetrics": {
+    "emailCampaign": {
+      "openRateTarget": "25%",
+      "clickRateTarget": "15%", 
+      "responseRateTarget": "10%",
+      "demoRequestTarget": "5%"
+    },
+    "socialMedia": {
+      "linkedinCTRTarget": "2%",
+      "facebookCTRTarget": "1%",
+      "engagementRateTarget": "5%",
+      "followerGrowthTarget": "10%"
+    },
+    "conversionFunnel": {
+      "visitToExploration": "40%",
+      "explorationToTrial": "25%", 
+      "trialToSignup": "15%",
+      "signupToActive": "60%"
+    }
+  }
+}

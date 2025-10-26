@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+        .header { background: #1976d2; color: white; padding: 20px; text-align: center; }
+        .content { padding: 30px; }
+        .cta-button { 
+            background: #2e7d32; 
+            color: white; 
+            padding: 12px 25px; 
+            text-decoration: none; 
+            border-radius: 5px; 
+            display: inline-block;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>💳 Payment Update Required</h1>
+        </div>
+        
+        <div class="content">
+            <h2>Hi {{customerName}},</h2>
+            
+            <p>We wanted to let you know that we had trouble processing your payment for the <strong>{{subscriptionPlan}}</strong> subscription.</p>
+            
+            <p><strong>Issue Details:</strong></p>
+            <ul>
+                <li>Subscription: {{subscriptionPlan}} ({{subscriptionPrice}})</li>
+                <li>Issue: {{errorDescription}}</li>
+                <li>Date: {{failureDate}}</li>
+            </ul>
+            
+            <p>Don't worry - this happens sometimes and is usually easy to fix!</p>
+            
+            <a href="{{recoveryLink}}" class="cta-button">
+                🔄 Retry Payment Now
+            </a>
+            
+            <p><strong>Common Solutions:</strong></p>
+            <ul>
+                <li>✓ Check that your card details are correct</li>
+                <li>✓ Ensure sufficient funds are available</li>
+                <li>✓ Verify with your bank if needed</li>
+                <li>✓ Try a different payment method</li>
+            </ul>
+            
+            <p>Your account remains active for now, but please update your payment method to avoid any service interruption.</p>
+            
+            <p>Questions? Reply to this email or contact our support team.</p>
+            
+            <p>Thanks for using Shorthand Tutor!</p>
+            
+            <p>Best,<br>
+            The Shorthand Tutor Team</p>
+        </div>
+    </div>
+</body>
+</html>

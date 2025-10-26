@@ -1,0 +1,30 @@
+{
+  "deployment_date": "2025-10-24",
+  "global_url": "https://tmaenge-dot.github.io/shorthand-tutor-app/",
+  "monitoring_enabled": true,
+  "tracking_methods": {
+    "server_logs": true,
+    "utm_parameters": true,
+    "campaign_attribution": true,
+    "google_analytics": "template_ready",
+    "facebook_pixel": "template_ready",
+    "microsoft_clarity": "template_ready"
+  },
+  "campaign_urls": {
+    "email_campaign": "https://tmaenge-dot.github.io/shorthand-tutor-app/?utm_source=email&utm_campaign=court-reporting-schools",
+    "social_linkedin": "https://tmaenge-dot.github.io/shorthand-tutor-app/?utm_source=social&utm_campaign=linkedin-professionals",
+    "social_facebook": "https://tmaenge-dot.github.io/shorthand-tutor-app/?utm_source=social&utm_campaign=facebook-groups",
+    "direct_access": "https://tmaenge-dot.github.io/shorthand-tutor-app/"
+  },
+  "target_metrics": {
+    "institutions_contacted": 3,
+    "expected_response_rate": "10-25%",
+    "social_engagement_target": "5%+",
+    "conversion_funnel": [
+      "visit",
+      "explore",
+      "signup",
+      "practice"
+    ]
+  }
+}

@@ -1,0 +1,23 @@
+DAY 1 CAMPAIGN UTM TRACKING CODES
+=================================
+
+Court Reporting Institute of Dallas:
+https://tmaenge-dot.github.io/shorthand-tutor-app/?utm_source=email&utm_medium=outreach&utm_campaign=court_reporting&utm_content=cri_dallas
+
+Bryan University:
+https://tmaenge-dot.github.io/shorthand-tutor-app/?utm_source=email&utm_medium=outreach&utm_campaign=court_reporting&utm_content=bryan_university
+
+Academy of Court Reporting:
+https://tmaenge-dot.github.io/shorthand-tutor-app/?utm_source=email&utm_medium=outreach&utm_campaign=court_reporting&utm_content=academy_cr
+
+LinkedIn Campaign:
+https://tmaenge-dot.github.io/shorthand-tutor-app/?utm_source=linkedin&utm_medium=social&utm_campaign=court_reporting&utm_content=professionals
+
+Facebook Groups:
+https://tmaenge-dot.github.io/shorthand-tutor-app/?utm_source=facebook&utm_medium=social&utm_campaign=court_reporting&utm_content=groups
+
+TRACKING NOTES:
+- Monitor Google Analytics for traffic from these sources
+- Track email open rates and responses
+- Monitor social media engagement
+- Document any demo requests or partnership inquiries

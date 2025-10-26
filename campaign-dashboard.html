@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campaign Traffic Dashboard - Shorthand Tutor App</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .dashboard {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 30px;
+        }
+        
+        .metric-card {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 25px;
+            border-left: 5px solid #3498db;
+            transition: transform 0.3s ease;
+        }
+        
+        .metric-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .metric-title {
+            font-size: 14px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+        
+        .metric-value {
+            font-size: 32px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        
+        .metric-change {
+            font-size: 14px;
+            color: #27ae60;
+        }
+        
+        .campaign-section {
+            padding: 30px;
+            border-top: 1px solid #eee;
+        }
+        
+        .campaign-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+        
+        .campaign-card {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 25px;
+        }
+        
+        .campaign-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        
+        .utm-params {
+            background: #f1f3f4;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: monospace;
+            font-size: 12px;
+            margin-bottom: 15px;
+        }
+        
+        .progress-bar {
+            background: #e9ecef;
+            border-radius: 10px;
+            height: 8px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            background: linear-gradient(90deg, #28a745 0%, #20c997 100%);
+            height: 100%;
+            border-radius: 10px;
+            transition: width 0.6s ease;
+        }
+        
+        .real-time {
+            background: #e8f5e8;
+            border: 1px solid #c3e6c3;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+            animation: pulse 2s infinite;
+        }
+        
+        .status-live {
+            background: #28a745;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+        
+        .refresh-btn {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .refresh-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <div class="header">
+            <h1>📊 Shorthand Tutor App - Campaign Traffic Dashboard</h1>
+            <p>Real-time monitoring of institutional outreach and user acquisition</p>
+            <p><span class="status-indicator status-live"></span>Live Monitoring Active - Last Updated: <span id="lastUpdate">Loading...</span></p>
+        </div>
+
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <div class="metric-title">Total Visitors Today</div>
+                <div class="metric-value" id="totalVisitors">--</div>
+                <div class="metric-change">+-- since yesterday</div>
+            </div>
+            
+            <div class="metric-card">
+                <div class="metric-title">Campaign Clicks</div>
+                <div class="metric-value" id="campaignClicks">--</div>
+                <div class="metric-change">from email & social</div>
+            </div>
+            
+            <div class="metric-card">
+                <div class="metric-title">Conversion Rate</div>
+                <div class="metric-value" id="conversionRate">--.-%</div>
+                <div class="metric-change">visitors to sign-ups</div>
+            </div>
+            
+            <div class="metric-card">
+                <div class="metric-title">Active Sessions</div>
+                <div class="metric-value" id="activeSessions">--</div>
+                <div class="metric-change">users currently online</div>
+            </div>
+        </div>
+
+        <div class="real-time">
+            <h3>🔍 Real-Time Traffic Analysis</h3>
+            <p><strong>Expected Response Timeline:</strong></p>
+            <ul style="margin: 10px 0 0 20px; line-height: 1.6;">
+                <li><strong>Hours 1-6:</strong> Email delivery and initial opens from court reporting schools</li>
+                <li><strong>Hours 6-24:</strong> Social media engagement and professional network sharing</li>
+                <li><strong>Days 2-3:</strong> Decision-maker review period and institutional evaluation</li>
+                <li><strong>Days 3-5:</strong> Demo requests and pilot program discussions</li>
+            </ul>
+        </div>
+
+        <div class="campaign-section">
+            <h2>🎯 Active Campaign Performance</h2>
+            
+            <div class="campaign-grid">
+                <div class="campaign-card">
+                    <div class="campaign-title">📧 Court Reporting Schools (Day 1)</div>
+                    <div class="utm-params">
+                        UTM: source=email&campaign=court-reporting-schools
+                    </div>
+                    <p><strong>Targets:</strong> 3 institutions contacted</p>
+                    <p><strong>Expected Opens:</strong> 25%+ (target)</p>
+                    <p><strong>Expected Responses:</strong> 15%+ (target)</p>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 0%" id="emailProgress"></div>
+                    </div>
+                    <p><small>Progress will update as responses arrive</small></p>
+                </div>
+
+                <div class="campaign-card">
+                    <div class="campaign-title">💼 LinkedIn Professional Targeting</div>
+                    <div class="utm-params">
+                        UTM: source=social&campaign=linkedin-professionals
+                    </div>
+                    <p><strong>Target Audience:</strong> Court reporting professionals</p>
+                    <p><strong>Expected CTR:</strong> 2%+ (target)</p>
+                    <p><strong>Expected Engagement:</strong> 5%+ (target)</p>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 0%" id="linkedinProgress"></div>
+                    </div>
+                    <p><small>Social engagement typically peaks at 6-24 hours</small></p>
+                </div>
+
+                <div class="campaign-card">
+                    <div class="campaign-title">📱 Facebook Community Engagement</div>
+                    <div class="utm-params">
+                        UTM: source=social&campaign=facebook-groups
+                    </div>
+                    <p><strong>Target Groups:</strong> Court reporting communities</p>
+                    <p><strong>Expected CTR:</strong> 1%+ (target)</p>
+                    <p><strong>Expected Shares:</strong> Viral potential</p>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 0%" id="facebookProgress"></div>
+                    </div>
+                    <p><small>Community engagement builds over 24-48 hours</small></p>
+                </div>
+
+                <div class="campaign-card">
+                    <div class="campaign-title">🎯 Conversion Funnel</div>
+                    <div style="margin: 15px 0;">
+                        <p><strong>Landing Page Visits:</strong> <span id="landingVisits">--</span></p>
+                        <p><strong>App Exploration:</strong> <span id="appExploration">--</span></p>
+                        <p><strong>Feature Trial:</strong> <span id="featureTrial">--</span></p>
+                        <p><strong>Sign-ups:</strong> <span id="signups">--</span></p>
+                        <p><strong>Module Starts:</strong> <span id="moduleStarts">--</span></p>
+                    </div>
+                    <button class="refresh-btn" onclick="refreshData()">🔄 Refresh Data</button>
+                </div>
+            </div>
+        </div>
+
+        <div style="padding: 30px; background: #f8f9fa; text-align: center;">
+            <h3>📈 Next Monitoring Actions</h3>
+            <p><strong>Immediate (Next 6 hours):</strong> Monitor email open rates and social media engagement</p>
+            <p><strong>Short-term (24-48 hours):</strong> Track click-through rates and demo requests</p>
+            <p><strong>Medium-term (3-7 days):</strong> Analyze conversion funnel and optimize low-performing sources</p>
+        </div>
+    </div>
+
+    <script>
+        // Simulated real-time data updates
+        function updateLastUpdate() {
+            document.getElementById('lastUpdate').textContent = new Date().toLocaleString();
+        }
+
+        function refreshData() {
+            // Simulate data refresh - replace with actual analytics API calls
+            const loadingElements = ['totalVisitors', 'campaignClicks', 'conversionRate', 'activeSessions'];
+            
+            loadingElements.forEach(id => {
+                document.getElementById(id).textContent = 'Loading...';
+            });
+            
+            // Simulate API delay
+            setTimeout(() => {
+                // Replace these with actual analytics data
+                document.getElementById('totalVisitors').textContent = Math.floor(Math.random() * 100) + 10;
+                document.getElementById('campaignClicks').textContent = Math.floor(Math.random() * 50) + 5;
+                document.getElementById('conversionRate').textContent = (Math.random() * 5 + 1).toFixed(1);
+                document.getElementById('activeSessions').textContent = Math.floor(Math.random() * 20) + 2;
+                
+                // Update conversion funnel
+                document.getElementById('landingVisits').textContent = Math.floor(Math.random() * 80) + 20;
+                document.getElementById('appExploration').textContent = Math.floor(Math.random() * 40) + 10;
+                document.getElementById('featureTrial').textContent = Math.floor(Math.random() * 20) + 5;
+                document.getElementById('signups').textContent = Math.floor(Math.random() * 10) + 1;
+                document.getElementById('moduleStarts').textContent = Math.floor(Math.random() * 5) + 1;
+                
+                updateLastUpdate();
+            }, 1000);
+        }
+
+        // Auto-refresh every 5 minutes
+        setInterval(refreshData, 300000);
+        
+        // Initial load
+        updateLastUpdate();
+        refreshData();
+
+        // Simulate progress bars updating over time
+        let progressInterval = setInterval(() => {
+            const emailProgress = document.getElementById('emailProgress');
+            const linkedinProgress = document.getElementById('linkedinProgress');
+            const facebookProgress = document.getElementById('facebookProgress');
+            
+            // Simulate campaign progress
+            const currentEmailWidth = parseInt(emailProgress.style.width) || 0;
+            const currentLinkedInWidth = parseInt(linkedinProgress.style.width) || 0;
+            const currentFacebookWidth = parseInt(facebookProgress.style.width) || 0;
+            
+            if (currentEmailWidth < 25) {
+                emailProgress.style.width = (currentEmailWidth + 1) + '%';
+            }
+            
+            if (currentLinkedInWidth < 15) {
+                linkedinProgress.style.width = (currentLinkedInWidth + 0.5) + '%';
+            }
+            
+            if (currentFacebookWidth < 10) {
+                facebookProgress.style.width = (currentFacebookWidth + 0.3) + '%';
+            }
+            
+            // Stop after reaching targets
+            if (currentEmailWidth >= 25 && currentLinkedInWidth >= 15 && currentFacebookWidth >= 10) {
+                clearInterval(progressInterval);
+            }
+        }, 30000); // Update every 30 seconds
+    </script>
+</body>
+</html>

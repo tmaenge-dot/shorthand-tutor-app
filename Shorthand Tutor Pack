@@ -1,0 +1,145 @@
+#!/usr/bin/env python3
+"""
+Shorthand Tutor Pack - simple CLI flashcard trainer
+Save this file as: /home/oem/Desktop/Shorthand/Shorthand Tutor Pack
+(Executable permission recommended: chmod +x "Shorthand Tutor Pack")
+"""
+
+import json
+import random
+from pathlib import Path
+from typing import Dict, List
+
+STORE = Path.home() / "Desktop" / "Shorthand" / "shorthand_store.json"
+
+
+def ensure_store() -> Dict[str, List[Dict[str, str]]]:
+    if STORE.exists():
+        try:
+            return json.loads(STORE.read_text())
+        except Exception:
+            pass
+    # default sample content
+    sample = {
+        "Lesson 1 - Basics": [
+            {"prompt": "Common", "answer": "k-mn (example shorthand)"},
+            {"prompt": "About", "answer": "ab-t"},
+        ],
+        "Lesson 2 - Numbers": [
+            {"prompt": "One", "answer": "1"},
+            {"prompt": "Two", "answer": "2"},
+        ],
+    }
+    STORE.parent.mkdir(parents=True, exist_ok=True)
+    STORE.write_text(json.dumps(sample, indent=2, ensure_ascii=False))
+    return sample
+
+
+def save_store(store: Dict[str, List[Dict[str, str]]]) -> None:
+    STORE.write_text(json.dumps(store, indent=2, ensure_ascii=False))
+
+
+def menu(options: List[str]) -> int:
+    for i, opt in enumerate(options, 1):
+        print(f"{i}. {opt}")
+    print("0. Quit")
+    while True:
+        choice = input("Choose: ").strip()
+        if choice.isdigit():
+            n = int(choice)
+            if 0 <= n <= len(options):
+                return n
+        print("Invalid choice.")
+
+
+def list_lessons(store: Dict[str, List[Dict[str, str]]]) -> None:
+    if not store:
+        print("No lessons available.")
+        return
+    for name, cards in store.items():
+        print(f"- {name} ({len(cards)} cards)")
+
+
+def practice(lesson_name: str, cards: List[Dict[str, str]]) -> None:
+    if not cards:
+        print("No cards in this lesson.")
+        return
+    pool = cards[:]
+    random.shuffle(pool)
+    correct = 0
+    for card in pool:
+        print("\nPrompt:", card["prompt"])
+        ans = input("Your answer (enter to show correct): ").strip()
+        if ans == "":
+            print("Answer:", card["answer"])
+            ok = input("Mark correct? (y/n): ").strip().lower()
+            if ok == "y":
+                correct += 1
+        else:
+            if ans.lower() == card["answer"].lower():
+                print("Correct")
+                correct += 1
+            else:
+                print("Wrong. Correct:", card["answer"])
+    print(f"\nSession finished. Score: {correct}/{len(cards)}")
+
+
+def add_card(store: Dict[str, List[Dict[str, str]]]) -> None:
+    lesson = input("Lesson name (will be created if missing): ").strip()
+    if not lesson:
+        print("Lesson name required.")
+        return
+    prompt = input("Card prompt: ").strip()
+    answer = input("Card answer: ").strip()
+    if not prompt or not answer:
+        print("Both prompt and answer required.")
+        return
+    store.setdefault(lesson, []).append({"prompt": prompt, "answer": answer})
+    save_store(store)
+    print("Card added and saved.")
+
+
+def main():
+    store = ensure_store()
+    while True:
+        print("\nShorthand Tutor Pack")
+        choice = menu([
+            "List lessons",
+            "Practice a lesson",
+            "Add a card",
+            "Export store to JSON",
+        ])
+        if choice == 0:
+            print("Goodbye.")
+            break
+        elif choice == 1:
+            list_lessons(store)
+        elif choice == 2:
+            if not store:
+                print("No lessons to practice.")
+                continue
+            lessons = list(store.keys())
+            for i, ln in enumerate(lessons, 1):
+                print(f"{i}. {ln} ({len(store[ln])} cards)")
+            sel = input("Select lesson number: ").strip()
+            if sel.isdigit():
+                idx = int(sel) - 1
+                if 0 <= idx < len(lessons):
+                    practice(lessons[idx], store[lessons[idx]])
+                else:
+                    print("Invalid selection.")
+            else:
+                print("Invalid input.")
+        elif choice == 3:
+            add_card(store)
+        elif choice == 4:
+            out = input("Export filename (absolute or relative): ").strip()
+            if out:
+                Path(out).write_text(json.dumps(store, indent=2, ensure_ascii=False))
+                print("Exported.")
+            else:
+                print("No filename provided.")
+
+
+if __name__ == "__main__":
+    main()

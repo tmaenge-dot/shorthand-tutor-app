@@ -1,0 +1,109 @@
+{
+  "schema_version": "1.0",
+  "unit": 1,
+  "description": "Canonical stroke registry for Pitman Anniversary Edition — Unit 1 (first six consonants and immediate pairings). Each stroke references an SVG path in /assets/svgs/unit_1/.",
+  "strokes": [
+    {
+      "id": "U1_P_light",
+      "label": "P (light)",
+      "unit": 1,
+      "stroke_type": "straight_downstroke",
+      "formation": "Light straight downstroke, written top-to-bottom",
+      "direction": "down",
+      "weight": "light",
+      "pairs_with": "U1_B_heavy",
+      "svg": "assets/svgs/unit_1/P_light.svg",
+      "examples": ["pay", "pipe"],
+      "source": {
+        "book": "Pitman Anniversary Edition",
+        "reference": "Unit 1 (instructor-provided reference)"
+      },
+      "notes": "Use light stroke for unvoiced P; heavier stroke for B (voiced)."
+    },
+    {
+      "id": "U1_B_heavy",
+      "label": "B (heavy)",
+      "unit": 1,
+      "stroke_type": "straight_downstroke",
+      "formation": "Heavy straight downstroke (same shape, heavier)",
+      "direction": "down",
+      "weight": "heavy",
+      "pairs_with": "U1_P_light",
+      "svg": "assets/svgs/unit_1/B_heavy.svg",
+      "examples": ["bay", "bob"],
+      "source": {
+        "book": "Pitman Anniversary Edition",
+        "reference": "Unit 1"
+      },
+      "notes": "Heavier stroke (increase stroke-width) indicates voiced consonant."
+    },
+    {
+      "id": "U1_T_light",
+      "label": "T (light)",
+      "unit": 1,
+      "stroke_type": "straight_upstroke",
+      "formation": "Light straight upstroke, written bottom-to-top",
+      "direction": "up",
+      "weight": "light",
+      "pairs_with": "U1_D_heavy",
+      "svg": "assets/svgs/unit_1/T_light.svg",
+      "examples": ["tea", "tie"],
+      "source": {
+        "book": "Pitman Anniversary Edition",
+        "reference": "Unit 1"
+      },
+      "notes": ""
+    },
+    {
+      "id": "U1_D_heavy",
+      "label": "D (heavy)",
+      "unit": 1,
+      "stroke_type": "straight_upstroke",
+      "formation": "Heavy straight upstroke",
+      "direction": "up",
+      "weight": "heavy",
+      "pairs_with": "U1_T_light",
+      "svg": "assets/svgs/unit_1/D_heavy.svg",
+      "examples": ["day", "dare"],
+      "source": {
+        "book": "Pitman Anniversary Edition",
+        "reference": "Unit 1"
+      },
+      "notes": ""
+    },
+    {
+      "id": "U1_CH_light",
+      "label": "CH (light) / J (heavy)",
+      "unit": 1,
+      "stroke_type": "slanted_upstroke",
+      "formation": "Slanted upward stroke (slight diagonal). Light for CH, heavier for J.",
+      "direction": "up-right",
+      "weight": "light/heavy",
+      "pairs_with": "U1_J_heavy",
+      "svg": "assets/svgs/unit_1/CH_slanted.svg",
+      "examples": ["chair", "chew"],
+      "source": {
+        "book": "Pitman Anniversary Edition",
+        "reference": "Unit 1"
+      },
+      "notes": "Same basic shape; weight distinguishes the voiced consonant J."
+    },
+    {
+      "id": "U1_J_heavy",
+      "label": "J (heavy)",
+      "unit": 1,
+      "stroke_type": "slanted_upstroke",
+      "formation": "Slanted upward stroke heavier variant for J",
+      "direction": "up-right",
+      "weight": "heavy",
+      "pairs_with": "U1_CH_light",
+      "svg": "assets/svgs/unit_1/J_heavy.svg",
+      "examples": ["judge"],
+      "source": {
+        "book": "Pitman Anniversary Edition",
+        "reference": "Unit 1"
+      },
+      "notes": ""
+    }
+  ]
+}

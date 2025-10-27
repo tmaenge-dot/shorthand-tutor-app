@@ -1,0 +1,6 @@
+{"word":"pay","phonemes":["P","EY"],"rule_outlines":["U1_P_light","V_EY"],"source":"rule_engine"}
+{"word":"bay","phonemes":["B","EY"],"rule_outlines":["U1_B_heavy","V_EY"],"source":"rule_engine"}
+{"word":"tea","phonemes":["T","IY"],"rule_outlines":["U1_T_light","V_IY"],"source":"rule_engine"}
+{"word":"day","phonemes":["D","EY"],"rule_outlines":["U1_D_heavy","V_EY"],"source":"rule_engine"}
+{"word":"chair","phonemes":["CH","EH","R"],"rule_outlines":["U1_CH_light","V_EH","RAW_R"],"source":"rule_engine"}
+{"word":"judge","phonemes":["JH","AH","JH"],"rule_outlines":["U1_J_heavy","V_AH","U1_J_heavy"],"source":"rule_engine"}

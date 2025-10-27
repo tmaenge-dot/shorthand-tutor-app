@@ -1,0 +1,7 @@
+# small sample wordlist (replace with larger list for full bootstrap)
+pay
+bay
+tea
+day
+chair
+judge

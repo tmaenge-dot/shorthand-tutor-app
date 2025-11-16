@@ -1,3 +1,4 @@
+```md
 # PITMAN_BLUEPRINT
 
 Short notes: this document describes the canonical encoding approach used for Unit 1 stroke registry.
@@ -7,3 +8,4 @@ Short notes: this document describes the canonical encoding approach used for Un
   1. Confirm SVG previews render correctly.
   2. Confirm stroke IDs and metadata in data/strokes/unit_1.json.
   3. Confirm legal/permission status before public release.
+```

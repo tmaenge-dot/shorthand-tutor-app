@@ -38,18 +38,24 @@ export default defineConfig({
           router: ['react-router-dom'],
           firebase: ['firebase/app', 'firebase/auth', 'firebase/firestore'],
           utils: ['react-hot-toast']
-        }
+        },
+        sourcemapExcludeSources: true
       }
     },
     terserOptions: {
       compress: {
         drop_console: true,
         drop_debugger: true
+      },
+      format: {
+        comments: false
       }
     },
-    chunkSizeWarningLimit: 1000
+    chunkSizeWarningLimit: 1000,
+    reportCompressedSize: false
   },
   define: {
-    __DEV__: JSON.stringify(true)
+    __DEV__: JSON.stringify(false),
+    'process.env.NODE_ENV': JSON.stringify('production')
   }
 })

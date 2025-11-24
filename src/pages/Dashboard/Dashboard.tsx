@@ -48,14 +48,17 @@ const Dashboard: React.FC = () => {
   const currentAccuracy = getCurrentAccuracy()
   const currentLesson = getLessonById(userProgressState.currentModule || 'A')
 
-  // Initialize user if not already done
+  // Show login-required message if user is not logged in
+  const isLoggedIn = !!userProgressState.user && userProgressState.user.name !== 'Student';
+
   useEffect(() => {
-    if (!userProgressState.user) {
-      initializeUser({
-        name: 'Student',
-        currentModule: 'A'
-      })
-    }
+    // Optionally, you can keep auto-initialization for demo/testing, but for real learners, require login
+    // if (!userProgressState.user) {
+    //   initializeUser({
+    //     name: 'Student',
+    //     currentModule: 'A'
+    //   })
+    // }
   }, [userProgressState.user, initializeUser])
 
   // Get recent activity
@@ -115,13 +118,30 @@ const Dashboard: React.FC = () => {
 
   const upcomingDeadlines = getUpcomingDeadlines()
 
+
+  if (!isLoggedIn) {
+    return (
+      <Box sx={{ p: 3 }}>
+        <Alert severity="warning" sx={{ mb: 3 }}>
+          <Typography variant="h5" fontWeight="600" gutterBottom>
+            Please log in to access your dashboard
+          </Typography>
+          <Typography variant="body1">
+            If you are a learner, use your login details provided by your instructor.<br />
+            If you do not have an account, please contact your instructor or administrator.
+          </Typography>
+        </Alert>
+      </Box>
+    );
+  }
+
   if (userProgressState.isLoading) {
     return (
       <Box sx={{ p: 3 }}>
         <Typography variant="h4" gutterBottom>Loading Dashboard...</Typography>
         <LinearProgress />
       </Box>
-    )
+    );
   }
 
   return (

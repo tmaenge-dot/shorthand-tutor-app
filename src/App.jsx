@@ -1,5 +1,5 @@
 import React, { Suspense, lazy } from 'react'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, useLocation, useNavigate, Link } from 'react-router-dom'
 import { Box, Typography, Button } from '@mui/material'
 import { Toaster } from 'react-hot-toast'
 
@@ -68,6 +68,22 @@ const WelcomeScreen = lazy(() => import('./components/Auth/WelcomeScreen'))
 import LearnerFeedback from './components/Feedback/LearnerFeedback'
 const FeedbackAnalytics = lazy(() => import('./components/Feedback/FeedbackAnalytics'))
 
+// GitHub Pages SPA redirect support
+function GithubPagesRedirectHandler() {
+  const location = useLocation();
+  const navigate = useNavigate();
+  React.useEffect(() => {
+    // If the path starts with '/?/', extract the route and redirect
+    if (location.pathname === '/' && location.search.startsWith('?/')) {
+      const newPath = location.search
+        .replace(/^\?\//, '/') // remove leading ?/
+        .replace(/~and~/g, '&'); // restore &
+      navigate(newPath, { replace: true });
+    }
+  }, [location, navigate]);
+  return null;
+}
+
 function App() {
   return (
     <ErrorBoundary>
@@ -76,11 +92,13 @@ function App() {
           <UserProgressProvider>
             <LessonProvider>
             <Router 
+              basename="/shorthand-tutor-app"
               future={{
                 v7_startTransition: true,
                 v7_relativeSplatPath: true
               }}
             >
+              <GithubPagesRedirectHandler />
               <Box sx={{ display: 'flex', minHeight: '100vh' }}>
                 <Navigation />
                 <Box component="main" sx={{ 
@@ -92,83 +110,60 @@ function App() {
                 }}>
                   <Suspense fallback={<LoadingSpinner />}>
                     <Routes>
-                      {/* Welcome/Auth Routes */}
                       <Route path="/" element={<WelcomeScreen />} />
                       <Route path="/signin" element={<SignIn />} />
                       <Route path="/signup" element={<SignUp />} />
-                      
-                      {/* Core Learning Routes - STABLE SIMPLE COMPONENTS ONLY */}
-                      <Route path="/dashboard" element={<ProtectedRoute><SimpleDashboard /></ProtectedRoute>} />
-                      <Route path="/lesson/:moduleId" element={<ProtectedRoute><LessonModule /></ProtectedRoute>} />
-                      <Route path="/practice" element={<ProtectedRoute><SimplePractice /></ProtectedRoute>} />
-                      <Route path="/practice/:lessonId" element={<ProtectedRoute><SimplePractice /></ProtectedRoute>} />
-                      <Route path="/assessment" element={<ProtectedRoute><SimpleAssessment /></ProtectedRoute>} />
-                      <Route path="/assessment/:moduleId" element={<ProtectedRoute><SimpleAssessment /></ProtectedRoute>} />
-                      <Route path="/progress" element={<ProtectedRoute><SimpleProgress /></ProtectedRoute>} />
-                      <Route path="/speed-development" element={<ProtectedRoute><SimpleSpeedDevelopment /></ProtectedRoute>} />
-                      <Route path="/speed-development/:moduleId" element={<ProtectedRoute><SimpleSpeedDevelopment /></ProtectedRoute>} />
-                      
-                      {/* Stroke Recognition System */}
-                      <Route path="/stroke-recognition" element={<ProtectedRoute><AIStrokeRecognitionSystem /></ProtectedRoute>} />
-                      <Route path="/stroke-assessment" element={<ProtectedRoute><StrokeRecognitionAssessment /></ProtectedRoute>} />
-                      
-                      {/* AI Vowel and Phrase System */}
-                      <Route path="/ai-vowel-phrase" element={<ProtectedRoute><AIVowelPhraseSystem /></ProtectedRoute>} />
-                      
-                      {/* Outline and Phrasing System */}
-                      <Route path="/outline-phrasing" element={<ProtectedRoute><OutlinePhrasingSystem /></ProtectedRoute>} />
-                      <Route path="/shortforms" element={<ProtectedRoute><ShortformLearningSystem /></ProtectedRoute>} />
-                      <Route path="/phrasing" element={<ProtectedRoute><PhrasingLearningSystem /></ProtectedRoute>} />
-                      
-                      {/* Q&A Assistant */}
-                      <Route path="/qa-assistant" element={<ProtectedRoute><QAAssistant /></ProtectedRoute>} />
-                      
-                      {/* AI-Powered Billing and Payments */}
-                      <Route path="/billing" element={<ProtectedRoute><AIBillingSystem /></ProtectedRoute>} />
-                      <Route path="/payments" element={<ProtectedRoute><AIPaymentSystem /></ProtectedRoute>} />
-                      
-                      {/* AI System Manager */}
-                      <Route path="/ai-system-manager" element={<ProtectedRoute><AISystemManager /></ProtectedRoute>} />
-                      
-                      {/* Deployment Readiness */}
-                      <Route path="/deployment" element={<ProtectedRoute><DeploymentReadiness /></ProtectedRoute>} />
-                      
-                      {/* Analytics */}
-                      <Route path="/analytics" element={<ProtectedRoute><AnalyticsLite /></ProtectedRoute>} />
-                      
-                      {/* Resources */}
-                      <Route path="/resources" element={<ProtectedRoute><Resources /></ProtectedRoute>} />
-                      
-                      {/* Symbol Reference */}
-                      <Route path="/reference" element={<ProtectedRoute><SymbolReference /></ProtectedRoute>} />
-                      
-                      {/* Testing Phase Analytics */}
-                      <Route path="/feedback-analytics" element={<FeedbackAnalytics />} />
-                      
-                      {/* Fallback Route */}
+                      <Route path="/feedback" element={<LearnerFeedback />} />
+                      <Route path="/analytics" element={<AnalyticsLite />} />
+                      <Route path="/resources" element={<Resources />} />
+                      <Route path="/reference" element={<SymbolReference />} />
+                      <Route path="/lesson-module" element={<ProtectedRoute requireAuth={true}><LessonModule /></ProtectedRoute>} />
+                      <Route path="/lesson/:moduleId" element={<ProtectedRoute requireAuth={true}><LessonModule /></ProtectedRoute>} />
+                      <Route path="/dashboard" element={<SimpleDashboard />} />
+                      <Route path="/practice" element={<SimplePractice />} />
+                      <Route path="/practice/:lessonId" element={<SimplePractice />} />
+                      <Route path="/assessment" element={<SimpleAssessment />} />
+                      <Route path="/progress" element={<SimpleProgress />} />
+                      <Route path="/speed-development" element={<SimpleSpeedDevelopment />} />
+                      <Route path="/stroke-recognition" element={<AIStrokeRecognitionSystem />} />
+                      <Route path="/stroke-assessment" element={<StrokeRecognitionAssessment />} />
+                      <Route path="/ai-vowel-phrase" element={<AIVowelPhraseSystem />} />
+                      <Route path="/outline-phrasing" element={<OutlinePhrasingSystem />} />
+                      <Route path="/shortforms" element={<Suspense fallback={<LoadingSpinner />}><ProtectedRoute requireAuth={true}><ShortformLearningSystem /></ProtectedRoute></Suspense>} />
+                      <Route path="/phrasing" element={<Suspense fallback={<LoadingSpinner />}><ProtectedRoute requireAuth={true}><PhrasingLearningSystem /></ProtectedRoute></Suspense>} />
+                      <Route path="/qa-assistant" element={<QAAssistant />} />
+                      <Route path="/billing" element={<AIBillingSystem />} />
+                      <Route path="/payments" element={<AIPaymentSystem />} />
+                      <Route path="/ai-system-manager" element={<AISystemManager />} />
+                      <Route path="/deployment-readiness" element={<DeploymentReadiness />} />
+                      {/* Add more routes as needed */}
                       <Route path="*" element={
                         <Box sx={{ textAlign: 'center', mt: 4 }}>
                           <Typography variant="h4" gutterBottom>
-                            Page Not Found
+                            Sign In or Sign Up
                           </Typography>
                           <Typography variant="body1" color="text.secondary" sx={{ mb: 2 }}>
-                            The page you're looking for doesn't exist.
+                            The page you tried to visit does not exist or requires you to be signed in.<br /><br />
+                            <strong>If you are a learner:</strong><br />
+                            Please <Link to="/signin" style={{ color: '#1976d2' }}>sign in</Link> or <Link to="/signup" style={{ color: '#43a047' }}>create an account</Link> to continue.<br />
+                            If you need help, contact your instructor or administrator.<br /><br />
+                            <span style={{ color: '#ffc107' }}>This is not an error—just a helpful message to guide you!</span>
                           </Typography>
-                          <Button variant="contained" href="/dashboard">
-                            Go to Dashboard
-                          </Button>
+                          <Box sx={{ mt: 2 }}>
+                            <Button variant="contained" component={Link} to="/signin" sx={{ mr: 2, backgroundColor: '#1976d2' }}>
+                              Sign In
+                            </Button>
+                            <Button variant="contained" component={Link} to="/signup" sx={{ backgroundColor: '#43a047' }}>
+                              Sign Up
+                            </Button>
+                          </Box>
                         </Box>
                       } />
                     </Routes>
                   </Suspense>
                 </Box>
               </Box>
-              
-              {/* Floating Feedback Component for Testing Phase */}
-              <LearnerFeedback />
-              
-              {/* Toast Notifications */}
-              <Toaster position="top-right" />
+              {/* ...existing code... */}
             </Router>
             </LessonProvider>
           </UserProgressProvider>

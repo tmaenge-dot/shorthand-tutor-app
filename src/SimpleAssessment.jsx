@@ -44,11 +44,19 @@ function TabPanel(props) {
       role="tabpanel"
       hidden={value !== index}
       id={`assessment-tabpanel-${index}`}
+      aria-labelledby={`assessment-tab-${index}`}
       {...other}
     >
       {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
     </div>
   )
+}
+
+function a11yProps(index) {
+  return {
+    id: `assessment-tab-${index}`,
+    'aria-controls': `assessment-tabpanel-${index}`,
+  }
 }
 
 const SimpleAssessment = () => {
@@ -318,10 +326,31 @@ const SimpleAssessment = () => {
 
       {/* Assessment Type Selection */}
       <Paper sx={{ mb: 3 }}>
-        <Tabs value={activeTab} onChange={handleTabChange} variant="fullWidth">
-          <Tab icon={<Assignment />} label="Theory Check" />
-          <Tab icon={<Timer />} label="Speed Test" />
-          <Tab icon={<CheckCircle />} label="Results" />
+        <Tabs 
+          value={activeTab} 
+          onChange={handleTabChange} 
+          variant="fullWidth" 
+          aria-label="assessment tabs"
+          sx={{ minHeight: 48 }}
+        >
+          <Tab 
+            icon={<Assignment />} 
+            label="Theory Check" 
+            {...a11yProps(0)}
+            sx={{ minHeight: 48 }}
+          />
+          <Tab 
+            icon={<Timer />} 
+            label="Speed Test" 
+            {...a11yProps(1)}
+            sx={{ minHeight: 48 }}
+          />
+          <Tab 
+            icon={<CheckCircle />} 
+            label="Results" 
+            {...a11yProps(2)}
+            sx={{ minHeight: 48 }}
+          />
         </Tabs>
       </Paper>
 

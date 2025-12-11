@@ -33,6 +33,13 @@ function TabPanel(props) {
   )
 }
 
+function a11yProps(index) {
+  return {
+    id: `practice-tab-${index}`,
+    'aria-controls': `practice-tabpanel-${index}`,
+  }
+}
+
 const SimplePractice = () => {
   const { lessonId } = useParams()
   const navigate = useNavigate()
@@ -180,10 +187,31 @@ const SimplePractice = () => {
 
           {/* Practice Type Selection */}
           <Paper sx={{ mb: 3 }}>
-            <Tabs value={activeTab} onChange={handleTabChange} variant="fullWidth">
-              <Tab icon={<School />} label="Module Practice" />
-              <Tab icon={<Assignment />} label="Stroke Practice" />
-              <Tab icon={<PlayArrow />} label="Interactive Canvas" />
+            <Tabs 
+              value={activeTab} 
+              onChange={handleTabChange} 
+              variant="fullWidth" 
+              aria-label="practice tabs"
+              sx={{ minHeight: 48 }}
+            >
+              <Tab 
+                icon={<School />} 
+                label="Module Practice" 
+                {...a11yProps(0)}
+                sx={{ minHeight: 48 }}
+              />
+              <Tab 
+                icon={<Assignment />} 
+                label="Stroke Practice" 
+                {...a11yProps(1)}
+                sx={{ minHeight: 48 }}
+              />
+              <Tab 
+                icon={<PlayArrow />} 
+                label="Interactive Canvas" 
+                {...a11yProps(2)}
+                sx={{ minHeight: 48 }}
+              />
             </Tabs>
           </Paper>
 

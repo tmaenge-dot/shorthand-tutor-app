@@ -16,7 +16,8 @@ import {
   ListItemText,
   ListItemIcon,
   ListItemButton,
-  Button
+  Button,
+  Badge
 } from '@mui/material'
 import {
   School,
@@ -34,43 +35,59 @@ import {
   Create,
   Link as LinkIcon,
   Group,
-  QuestionAnswer
+  QuestionAnswer,
+  Lock,
+  LockOpen
 } from '@mui/icons-material'
 import { useAuth } from './hooks/useAuthMock'
-import GuestUserBanner from './components/Auth/GuestUserBanner'
-import SubscriptionGate from './components/Subscription/SubscriptionGate'
-import UsageTracker from './components/Subscription/UsageTracker'
 import { useSubscription } from './hooks/useSubscription'
 import { useLessons } from './hooks/useLessons'
 import { useUserProgress } from './hooks/useUserProgress'
+import PayPalPaymentGate from './components/PayPalPaymentGate';
 
 const SimpleDashboard = () => {
   const navigate = useNavigate()
   const { currentUser } = useAuth()
   const { lessons } = useLessons()
   const { getOverallProgress, getCurrentSpeed, getCurrentAccuracy } = useUserProgress()
-  const { hasAccess, currentPlan } = useSubscription()
+  const { canAccessModule, subscription, FREE_MODULES } = useSubscription()
+  
+  const [showPaymentGate, setShowPaymentGate] = useState(false)
+  const [selectedModule, setSelectedModule] = useState(null)
   
   const overallProgress = getOverallProgress()
   const currentSpeed = getCurrentSpeed()
   const currentAccuracy = getCurrentAccuracy()
 
-  // Available modules based on subscription
-  const availableModules = ['A', 'B', 'C', 'D', 'E']
-  const premiumModules = ['F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U']
+  // All available modules
+  const allModules = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V']
 
   const handleNavigate = (path) => {
     navigate(path)
   }
 
+  const handleModuleClick = (module) => {
+    if (canAccessModule(module)) {
+      navigate(`/lesson/${module}`)
+    } else {
+      setSelectedModule(module)
+      setShowPaymentGate(true)
+    }
+  }
+
   return (
     <Box sx={{ p: 3 }}>
       <Container maxWidth="lg">
-        {/* Guest User Banner */}
-        <GuestUserBanner usage={{ speedExercises: 2, dictationMinutes: 5 }} />
-        
-        {/* Usage Tracker - temporarily disabled */}
-        {/* <UsageTracker variant="compact" /> */}
+        {/* Payment Gate Dialog */}
+        {selectedModule && (
+          <PayPalPaymentGate
+            open={showPaymentGate}
+            onClose={() => {
+              setShowPaymentGate(false)
+              setSelectedModule(null)
+            }}
+          />
+        )}
         
         <Grid container spacing={3}>
           {/* Welcome Section */}
@@ -212,57 +229,105 @@ const SimpleDashboard = () => {
           <Grid item xs={12}>
             <Card>
               <CardContent>
-                <Typography variant="h6" gutterBottom sx={{ display: 'flex', alignItems: 'center' }}>
-                  <School sx={{ mr: 1 }} />
-                  Learning Modules
-                </Typography>
+                <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
+                  <Typography variant="h6" sx={{ display: 'flex', alignItems: 'center' }}>
+                    <School sx={{ mr: 1 }} />
+                    Learning Modules
+                  </Typography>
+                  {!subscription.isPremium && (
+                    <Chip 
+                      label={`${FREE_MODULES.length} Free • ${allModules.length - FREE_MODULES.length} Premium`}
+                      color="primary"
+                      size="small"
+                    />
+                  )}
+                </Box>
                 
                 <Grid container spacing={2}>
-                  {availableModules.map((module) => (
-                    <Grid item xs={6} sm={4} md={2} key={module}>
-                      <Card 
-                        sx={{ 
-                          cursor: 'pointer',
-                          '&:hover': { bgcolor: 'primary.light' }
-                        }}
-                        onClick={() => handleNavigate(`/lesson/${module}`)}
-                      >
-                        <CardContent sx={{ textAlign: 'center', py: 2 }}>
-                          <Typography variant="h6">Module {module}</Typography>
-                          <CheckCircle sx={{ color: 'success.main', mt: 1 }} />
-                        </CardContent>
-                      </Card>
-                    </Grid>
-                  ))}
-                  
-                  {premiumModules.slice(0, 6).map((module) => (
-                    <Grid item xs={6} sm={4} md={2} key={module}>
-                      <SubscriptionGate feature="module" moduleId={module}>
+                  {allModules.slice(0, 12).map((module) => {
+                    const isLocked = !canAccessModule(module)
+                    const lesson = lessons.find(l => l.id === module)
+                    
+                    return (
+                      <Grid item xs={6} sm={4} md={2} key={module}>
                         <Card 
                           sx={{ 
                             cursor: 'pointer',
-                            '&:hover': { bgcolor: 'primary.light' }
+                            position: 'relative',
+                            '&:hover': { 
+                              bgcolor: isLocked ? 'grey.100' : 'primary.light',
+                              transform: 'translateY(-2px)',
+                              transition: 'all 0.2s'
+                            },
+                            opacity: isLocked ? 0.7 : 1,
+                            border: isLocked ? '2px dashed' : '2px solid transparent',
+                            borderColor: isLocked ? 'grey.300' : 'transparent'
                           }}
-                          onClick={() => handleNavigate(`/lesson/${module}`)}
+                          onClick={() => handleModuleClick(module)}
                         >
                           <CardContent sx={{ textAlign: 'center', py: 2 }}>
+                            {isLocked && (
+                              <Lock 
+                                sx={{ 
+                                  position: 'absolute', 
+                                  top: 8, 
+                                  right: 8, 
+                                  fontSize: 20,
+                                  color: 'warning.main'
+                                }} 
+                              />
+                            )}
                             <Typography variant="h6">Module {module}</Typography>
-                            <CheckCircle sx={{ color: 'success.main', mt: 1 }} />
+                            <Typography variant="caption" display="block" sx={{ mt: 0.5, height: 32, overflow: 'hidden' }}>
+                              {lesson?.title || 'Advanced Module'}
+                            </Typography>
+                            {!isLocked ? (
+                              <LockOpen sx={{ color: 'success.main', mt: 1, fontSize: 20 }} />
+                            ) : (
+                              <Chip 
+                                label="Premium" 
+                                size="small" 
+                                color="warning" 
+                                sx={{ mt: 1 }}
+                              />
+                            )}
                           </CardContent>
                         </Card>
-                      </SubscriptionGate>
-                    </Grid>
-                  ))}
+                      </Grid>
+                    )
+                  })}
                 </Grid>
                 
-                {currentPlan.id === 'free' && (
-                  <Box sx={{ mt: 3, textAlign: 'center' }}>
-                    <Typography variant="body2" color="text.secondary" sx={{ mb: 1 }}>
-                      Unlock all 20 modules with Premium
+                {!subscription.isPremium && (
+                  <Box sx={{ mt: 3, textAlign: 'center', p: 2, bgcolor: 'grey.50', borderRadius: 2 }}>
+                    <Typography variant="body1" fontWeight="bold" gutterBottom>
+                      🎓 Unlock Full Access to All Modules
                     </Typography>
-                    <Button variant="contained" color="primary">
-                      Upgrade Now
+                    <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+                      Modules A-D are free. Upgrade to access modules E-V and advanced features!
+                    </Typography>
+                    <Button 
+                      variant="contained" 
+                      color="primary"
+                      size="large"
+                      onClick={() => {
+                        setSelectedModule('E')
+                        setShowPaymentGate(true)
+                      }}
+                    >
+                      Upgrade to Premium - $29.99
                     </Button>
+                  </Box>
+                )}
+                
+                {subscription.isPremium && (
+                  <Box sx={{ mt: 3, textAlign: 'center', p: 2, bgcolor: 'success.light', borderRadius: 2 }}>
+                    <Typography variant="body1" fontWeight="bold" color="success.dark">
+                      ✨ Premium Member - All Modules Unlocked!
+                    </Typography>
+                    <Typography variant="body2" color="success.dark">
+                      Valid until: {new Date(subscription.expiryDate).toLocaleDateString()}
+                    </Typography>
                   </Box>
                 )}
               </CardContent>

@@ -36,11 +36,19 @@ function TabPanel(props) {
       role="tabpanel"
       hidden={value !== index}
       id={`progress-tabpanel-${index}`}
+      aria-labelledby={`progress-tab-${index}`}
       {...other}
     >
       {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
     </div>
   )
+}
+
+function a11yProps(index) {
+  return {
+    id: `progress-tab-${index}`,
+    'aria-controls': `progress-tabpanel-${index}`,
+  }
 }
 
 const SimpleProgress = () => {
@@ -177,10 +185,31 @@ const SimpleProgress = () => {
 
       {/* Progress Tabs */}
       <Paper sx={{ mb: 3 }}>
-        <Tabs value={activeTab} onChange={handleTabChange} variant="fullWidth">
-          <Tab icon={<School />} label="Module Progress" />
-          <Tab icon={<Speed />} label="Speed Development" />
-          <Tab icon={<TrendingUp />} label="Achievements" />
+        <Tabs 
+          value={activeTab} 
+          onChange={handleTabChange} 
+          variant="fullWidth" 
+          aria-label="progress tabs"
+          sx={{ minHeight: 48 }}
+        >
+          <Tab 
+            icon={<School />} 
+            label="Module Progress" 
+            {...a11yProps(0)}
+            sx={{ minHeight: 48 }}
+          />
+          <Tab 
+            icon={<Speed />} 
+            label="Speed Development" 
+            {...a11yProps(1)}
+            sx={{ minHeight: 48 }}
+          />
+          <Tab 
+            icon={<TrendingUp />} 
+            label="Achievements" 
+            {...a11yProps(2)}
+            sx={{ minHeight: 48 }}
+          />
         </Tabs>
       </Paper>
 

@@ -28,18 +28,22 @@ import {
 } from '@mui/icons-material'
 import { useLessons } from '../../hooks/useLessons'
 import { useUserProgress } from '../../hooks/useUserProgress'
+import { useSubscription } from '../../hooks/useSubscription'
 import ShorthandSymbol from '../../components/ShorthandSymbol/ShorthandSymbol'
 import StrokePractice from '../../components/StrokePractice/StrokePractice'
+import PayPalPaymentGate from '../../components/PayPalPaymentGate'
 import { shorthandSymbols } from '../../data/lessonData'
 
 const LessonModule: React.FC = () => {
   const { moduleId } = useParams<{ moduleId: string }>()
   const { lessons } = useLessons()
   const { state: userProgressState } = useUserProgress()
+  const { requiresUpgrade } = useSubscription()
   
   // Stroke practice state
   const [practiceSymbol, setPracticeSymbol] = React.useState(null)
   const [isPracticeOpen, setIsPracticeOpen] = React.useState(false)
+  const [showPaymentGate, setShowPaymentGate] = React.useState(false)
 
   // Practice handlers
   const handleStartPractice = (symbol: any) => {
@@ -65,11 +69,27 @@ const LessonModule: React.FC = () => {
     )
   }
 
+  // Check if module requires upgrade
+  const needsUpgrade = requiresUpgrade(moduleId)
+  
+  // Show payment gate on mount if upgrade required
+  React.useEffect(() => {
+    if (needsUpgrade) {
+      setShowPaymentGate(true)
+    }
+  }, [needsUpgrade])
+
   const moduleProgress = userProgressState.userProgress.find(p => p.moduleId === moduleId)
   const completedLessons = moduleProgress?.lessonProgress.filter(lp => lp.completed).length || 0
 
   return (
     <Box sx={{ p: 3 }}>
+      {/* Payment Gate Dialog */}
+      <PayPalPaymentGate
+        open={showPaymentGate}
+        onClose={() => setShowPaymentGate(false)}
+      />
+
       {/* Header */}
       <Box sx={{ mb: 4 }}>
         <Typography variant="h4" gutterBottom fontWeight="600">
